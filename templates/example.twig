@@ -1,0 +1,25 @@
+<div class="dt-example-item">
+    <table class="table table-hover">
+        <tr>
+            <td {% if status < 400 %}class="info" {% else %}class="danger"{% endif %}>{{ status }}</td>
+            <td class="success">{{ url }}</td>
+        </tr>
+    </table>
+</div>
+
+<table class="table dt-example-content" style="display: none">
+    <tbody>
+    <tr>
+        <td>Request</td>
+        <td>Response</td>
+    </tr>
+    <tr style="max-width: 50vh">
+        <td>
+            <pre style="width: auto">{{ request }}</pre>
+        </td>
+        <td>
+            <pre style="width: auto">{{ response }}</pre>
+        </td>
+    </tr>
+    </tbody>
+</table>

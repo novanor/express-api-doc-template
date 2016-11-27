@@ -1,0 +1,22 @@
+{% if examplesPresent %}
+    <td>
+        <div>+</div>
+    </td>
+{% else %}
+    <td>
+        <div>-</div>
+    </td>
+{% endif %}
+<td>
+    {% for method in methods %}
+        {{ method }}
+    {% endfor %}
+</td>
+<td>
+    {{ url }}
+</td>
+<td>
+    <a href="#sendBox/{{ model.id }}">
+        <button class="btn">Try</button>
+    </a>
+</td>
