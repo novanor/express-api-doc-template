@@ -14,7 +14,6 @@ const concat = require('gulp-concat');
 const modifyFile = require('gulp-modify-file');
 const uglify = require('gulp-uglify');
 
-gulp.task('watch', ['watch:js', 'watch:twig', 'watch:html']);
 
 const config = {
   js:    {
@@ -65,31 +64,7 @@ const config = {
   },
 };
 
-gulp.task('build:rjs', ['default'], () =>
-  gulp.src(config.build.rjs.entryPoint)
-    .pipe(rjs(config.build.rjs.options))
-    .pipe(gulp.dest(config.build.rjs.DEST_PATH))
-);
-
-gulp.task('build:concat', ['build:rjs'], () =>
-  gulp.src(config.build.concat.files)
-    .pipe(uglify())
-    .pipe(concat(config.build.concat.name))
-    .pipe(gulp.dest(config.build.concat.DEST_PATH))
-);
-
-gulp.task('build:html', ['build:concat'], () => {
-  const mainJs = fs.readFileSync('./public/main.js');
-  const bootstrapCss = fs.readFileSync('./bower_components/bootstrap/dist/css/bootstrap.min.css');
-  return gulp.src('./public/templates/template.html')
-    .pipe(modifyFile((content) => {
-      return content
-        .replace("'{{MAIN_SCRIPT}}'", mainJs.toString())
-        .replace("'{{BOOTSTRAP}}'", bootstrapCss.toString());
-    }))
-    .pipe(gulp.dest('./compiled'));
-});
-
+// Tasks for watch
 gulp.task('watch:js', () =>
   _.each(config.js.paths, (folder, wildcard) => {
     watch(wildcard, {ignoreInitial: false})
@@ -97,15 +72,6 @@ gulp.task('watch:js', () =>
       .pipe(logger({showChange: true}))
       .pipe(gulp.dest(`${config.js.DEST_PATH}/${folder}`));
   })
-);
-
-gulp.task('cp', () =>
-  _.each(config.cp.files, (name, path) =>
-    gulp.src(path)
-      .pipe(logger({showChange: true}))
-      .pipe(rename((f) => (f.basename = name)))
-      .pipe(gulp.dest(config.js.DEST_PATH))
-  )
 );
 
 gulp.task('watch:twig', () =>
@@ -122,9 +88,18 @@ gulp.task('watch:html', () =>
     .pipe(logger({showChange: true}))
     .pipe(gulp.dest(config.html.DEST_PATH)));
 
+// Tasks for default. Also ran on build.
 gulp.task('bower', () =>
   gulp.src(mainBowerFiles())
     .pipe(gulp.dest('./public')));
+
+gulp.task('babel', () =>
+  _.each(config.js.paths, (folder, wildcard) => {
+    gulp.src(wildcard)
+      .pipe(babel())
+      .pipe(gulp.dest(`${config.js.DEST_PATH}/${folder}`));
+  })
+);
 
 gulp.task('views', () =>
   gulp.src(config.views.paths)
@@ -145,14 +120,41 @@ gulp.task('css', () =>
   })
 );
 
-gulp.task('babel', () =>
-  _.each(config.js.paths, (folder, wildcard) => {
-    gulp.src(wildcard)
-      .pipe(babel())
-      .pipe(gulp.dest(`${config.js.DEST_PATH}/${folder}`));
-  })
+gulp.task('cp', () =>
+  _.each(config.cp.files, (name, path) =>
+    gulp.src(path)
+      .pipe(logger({showChange: true}))
+      .pipe(rename((f) => (f.basename = name)))
+      .pipe(gulp.dest(config.js.DEST_PATH))
+  )
 );
 
+// Tasks for build
+gulp.task('build:rjs', ['default'], () =>
+  gulp.src(config.build.rjs.entryPoint)
+    .pipe(rjs(config.build.rjs.options))
+    .pipe(gulp.dest(config.build.rjs.DEST_PATH))
+);
 
+gulp.task('build:concat', ['build:rjs'], () =>
+  gulp.src(config.build.concat.files)
+    .pipe(uglify())
+    .pipe(concat(config.build.concat.name))
+    .pipe(gulp.dest(config.build.concat.DEST_PATH))
+);
+
+gulp.task('build:html', ['build:concat'], () => {
+  const mainJs = fs.readFileSync('./public/main.js');
+  const bootstrapCss = fs.readFileSync('./bower_components/bootstrap/dist/css/bootstrap.min.css');
+  return gulp.src('./public/templates/template.html')
+    .pipe(modifyFile((content) =>
+       content
+        .replace("'{{MAIN_SCRIPT}}'", mainJs.toString())
+        .replace("'{{BOOTSTRAP}}'", bootstrapCss.toString())
+    ))
+    .pipe(gulp.dest('./compiled'));
+});
+
+gulp.task('watch', ['watch:js', 'watch:twig', 'watch:html']);
 gulp.task('default', ['bower', 'babel', 'views', 'html', 'css', 'cp']);
 gulp.task('build', ['build:html']);
