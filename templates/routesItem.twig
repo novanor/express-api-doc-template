@@ -1,10 +1,10 @@
 {% if examplesPresent %}
     <td>
-        <div>+</div>
+        <input type="checkbox" disabled="true" checked></input>
     </td>
 {% else %}
     <td>
-        <div>-</div>
+        <input type="checkbox" disabled="true"></input>
     </td>
 {% endif %}
 <td>
@@ -17,6 +17,6 @@
 </td>
 <td>
     <a href="#sendBox/{{ model.id }}">
-        <button class="btn">Try</button>
+        <button class="btn">More</button>
     </a>
 </td>
