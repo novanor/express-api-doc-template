@@ -19,7 +19,7 @@ const config = {
   js:    {
     paths:     {
       'frontend/**/*.js':             '',
-      'app/entryPoint/enrtyPoint.js': '',
+      'app/entryPoint/entryPoint.js': '',
     },
     DEST_PATH: './public',
   },
@@ -44,7 +44,7 @@ const config = {
   },
   build: {
     rjs:    {
-      entryPoint: './public/enrtyPoint.js',
+      entryPoint: './public/entryPoint.js',
       options:    {
         mainConfigFile: './public/config/requirejs.js',
         out:            'optimized-main.js',
