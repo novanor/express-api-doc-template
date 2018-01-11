@@ -1,4 +1,2 @@
-/* globals config: true */
-import _ from 'lodash';
-
-export default _.extend({}, config);
+// Inserted in the template after running `npm run docs` in the target project
+export default config;

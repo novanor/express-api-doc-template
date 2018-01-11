@@ -19,7 +19,7 @@ const SendBoxRouter = Backbone.Router.extend({
       examples,
       model,
     });
-    mainView.showChildView('content', sendBoxLayout);
+    mainView.showChildView('mainContainer', sendBoxLayout);
   },
 });
 
