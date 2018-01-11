@@ -6,6 +6,7 @@ const Layout = Marionette.View.extend({
 
   el:      '.container',
   regions: {
+    description: '.description',
     content: '.content',
   },
 });
