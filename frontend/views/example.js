@@ -17,35 +17,15 @@ const ExampleItem = Marionette.View.extend({
     this.ui.example.slideToggle();
   },
 
-  serializeData() { // type "application/json"
-    const request = JSON.stringify(JSON.parse(decodeURI(this.model.get('request'))), null, 2);
-    const model = this.model;
-    const decodedResponce = decodeURI(this.model.get('response'));
-    let response;
-    try {
-      response = JSON.stringify(JSON.parse(decodedResponce), null, 2);
-    } catch (err) {
-      const tagsToReplace = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-      };
-      response = decodedResponce.replace(/[&<>]/g, (tag) =>
-        tagsToReplace[tag] || tag
-      );
-    }
-    const method = model.get('method');
-    const status = model.get('status');
-    const url = model.get('url');
-    const type = model.get('type');
+  serializeData() {
     return {
-      model,
-      url,
-      status,
-      type,
-      method,
-      response,
-      request,
+      model:    this.model,
+      url:      this.model.get('url'),
+      status:   this.model.get('status'),
+      type:     this.model.get('type'),
+      method:   this.model.get('method'),
+      request:  JSON.stringify(this.model.get('request'), null, 2),
+      response: JSON.stringify(this.model.get('response'), null, 2),
     };
   },
 });
