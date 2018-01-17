@@ -1,40 +1,57 @@
-{% if method == 'GET' %}
-   <input title="method" class="dt-method" type="radio" name="methods" value="GET" checked>
+<div>
+   <h3>Route description:</h3>
+   <div style="font-size: 14">{{routeDescription}}</div>
+</div>
+{% if meta %}
+   <div>
+      <h3>Other route meta:</h3>
+      <div><pre>{{meta}}</pre></div>
+   </div>
 {% endif %}
 
-{% if method == 'POST' %}
-    <input title="method" class="dt-method" type="radio" name="methods" value="POST" checked>
-{% endif %}
+<h3>Route tester</h3>
+<div style="display: flex; align-items: baseline">
+   <div>
+      <label>
+         {% if method == 'GET' %}
+            <input title="method" class="dt-method" type="radio" name="methods" value="GET" checked>
+         {% endif %}
 
-{% if method == 'PUT' %}
-    <input title="method" class="dt-method" type="radio" name="methods" value="PUT" checked>
-{% endif %}
+         {% if method == 'POST' %}
+             <input title="method" class="dt-method" type="radio" name="methods" value="POST" checked>
+         {% endif %}
 
-{% if method == 'PATCH' %}
-    <input title="method" class="dt-method" type="radio" name="methods" value="PATCH" checked>
-{% endif %}
+         {% if method == 'PUT' %}
+             <input title="method" class="dt-method" type="radio" name="methods" value="PUT" checked>
+         {% endif %}
 
-{% if method == 'DELETE' %}
-    <input title="method" class="dt-method" type="radio" name="methods" value="DELETE" checked>
-{% endif %}
-<label>{{method}}</label>
+         {% if method == 'PATCH' %}
+             <input title="method" class="dt-method" type="radio" name="methods" value="PATCH" checked>
+         {% endif %}
 
+         {% if method == 'DELETE' %}
+             <input title="method" class="dt-method" type="radio" name="methods" value="DELETE" checked>
+         {% endif %}
+         {{method}}
+      </label>
+   </div>
 
-<br />
-Url:<input title="url" class="form-control dt-url" value="{{ path }}"/>
-<br />
+   <div style="margin-left: 15px; flex-grow: 1">
+      <input title="url" class="form-control dt-url" value="{{ path }}"/>
+   </div>
+</div>
 
-<table class="table">
+<table class="table" style="margin-top: 20px">
     <tbody>
     <tr>
-        <td>Request</td>
-        <td>Response&nbsp;<span class="dt-status"></span></td>
+        <td style="border-top: none">Request</td>
+        <td style="border-top: none">Response&nbsp;<span class="dt-status"></span></td>
     </tr>
     <tr>
-        <td style="width: 50%">
+        <td style="width: 50%; border-top: none">
            <textarea style="resize: none; height: 300px" title="input" class="dt-input form-control">{{lastExampleRequest}}</textarea>
       </td>
-        <td style="width: 50%">
+        <td style="width: 50%; border-top: none">
            <textarea style="resize: none; height: 300px" title="output" class="dt-output form-control"></textarea>
         </td>
     </tr>
