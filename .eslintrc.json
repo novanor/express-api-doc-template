@@ -14,13 +14,6 @@
         }
       }
     ],
-    "key-spacing": [
-      1,
-      {
-        "align": "value",
-        "mode": "minimum"
-      }
-    ],
     "strict": [
       2,
       "safe"
