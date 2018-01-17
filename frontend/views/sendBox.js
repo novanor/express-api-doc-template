@@ -13,10 +13,10 @@ const SendBox = Marionette.View.extend({
     this.messenger = new Messenger();
   },
   ui: {
-    url:          '.dt-url',
-    method:       '.dt-method',
-    input:        '.dt-input',
-    output:       '.dt-output',
+    url: '.dt-url',
+    method: '.dt-method',
+    input: '.dt-input',
+    output: '.dt-output',
     outputStatus: '.dt-status',
   },
 
@@ -52,8 +52,8 @@ const SendBox = Marionette.View.extend({
       data,
 
       contentType: 'application/json',
-      url:         this.ui.url.val(),
-      method:      this.$('.dt-method:checked').val(),
+      url: this.ui.url.val(),
+      method: this.$('.dt-method:checked').val(),
       success(response, textStatus, jqXHR) {
         let result;
         try {
@@ -88,11 +88,12 @@ const SendBox = Marionette.View.extend({
     } else if (_.last(prefix) !== '/' && _.first(postfix) !== '/') {
       path = `${prefix}/${postfix}`;
     }
+
     return {
       path,
-
-      model:  this.model,
-      method: _.map(this.model.get('methods'), (method, key) => _.upperCase(key))[0],
+      model: this.model,
+      method: this.model.get('method').toUpperCase(),
+      lastExampleRequest: JSON.stringify(this.model.get('lastExampleRequest'), null, 2),
     };
   },
 });

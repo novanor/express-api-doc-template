@@ -1,17 +1,28 @@
-<input title="method" class="dt-method" type="radio" name="methods"
-       value="PUT" {% if method == 'PUT' %} checked {% endif %}> PUT<Br>
-<input title="method" class="dt-method" type="radio" name="methods"
-       value="POST" {% if method == 'POST' %} checked {% endif %}> POST<Br>
-<input title="method" class="dt-method" type="radio" name="methods"
-       value="GET" {% if method == 'GET' %} checked {% endif %}> GET<Br>
-<input title="method" class="dt-method" type="radio" name="methods"
-       value="DELETE" {% if method == 'DELETE' %} checked {% endif %}> DELETE<Br>
-<input title="method" class="dt-method" type="radio" name="methods"
-       value="PATCH" {% if method == 'PATCH' %} checked {% endif %}> PATCH<Br>
+{% if method == 'GET' %}
+   <input title="method" class="dt-method" type="radio" name="methods" value="GET" checked>
+{% endif %}
 
-<Br>
+{% if method == 'POST' %}
+    <input title="method" class="dt-method" type="radio" name="methods" value="POST" checked>
+{% endif %}
+
+{% if method == 'PUT' %}
+    <input title="method" class="dt-method" type="radio" name="methods" value="PUT" checked>
+{% endif %}
+
+{% if method == 'PATCH' %}
+    <input title="method" class="dt-method" type="radio" name="methods" value="PATCH" checked>
+{% endif %}
+
+{% if method == 'DELETE' %}
+    <input title="method" class="dt-method" type="radio" name="methods" value="DELETE" checked>
+{% endif %}
+<label>{{method}}</label>
+
+
+<br />
 Url:<input title="url" class="form-control dt-url" value="{{ path }}"/>
-<Br>
+<br />
 
 <table class="table">
     <tbody>
@@ -20,8 +31,12 @@ Url:<input title="url" class="form-control dt-url" value="{{ path }}"/>
         <td>Response&nbsp;<span class="dt-status"></span></td>
     </tr>
     <tr>
-        <td style="width: 50%"><textarea style="resize: none; height: 300px" title="input" class="dt-input form-control"> </textarea></td>
-        <td style="width: 50%"><textarea style="resize: none; height: 300px" title="output" class="dt-output form-control"> </textarea></td>
+        <td style="width: 50%">
+           <textarea style="resize: none; height: 300px" title="input" class="dt-input form-control">{{lastExampleRequest}}</textarea>
+      </td>
+        <td style="width: 50%">
+           <textarea style="resize: none; height: 300px" title="output" class="dt-output form-control"></textarea>
+        </td>
     </tr>
     </tbody>
 </table>
