@@ -5,7 +5,6 @@ import allExamples from '../helpers/examples';
 import routesCollection from '../collections/routes';
 import SendBoxLayout from '../views/sendBoxLayout';
 import TitleLayout from '../views/titleLayout';
-import DescriptionLayout from '../views/descriptionLayout';
 import config from '../helpers/config';
 
 const SendBoxRouter = Backbone.Router.extend({
@@ -27,14 +26,10 @@ const SendBoxRouter = Backbone.Router.extend({
 
     const titleLayout = new TitleLayout({
       title: config.meta.title,
-    });
-
-    const descriptionLayout = new DescriptionLayout({
       description: config.meta.description,
     });
 
     mainView.showChildView('title', titleLayout);
-    mainView.showChildView('description', descriptionLayout);
     mainView.showChildView('mainContainer', sendBoxLayout);
   },
 });

@@ -7,6 +7,7 @@ const titleLayout = Marionette.View.extend({
   serializeData() {
     return {
       title: this.options.title,
+      description: this.options.description,
     };
   },
 });

@@ -4,7 +4,6 @@ import config from '../helpers/config';
 import mainView from '../views/layout';
 import RoutesLayout from '../views/routesLayout';
 import TitleLayout from '../views/titleLayout';
-import DescriptionLayout from '../views/descriptionLayout';
 
 const IndexRouter = Backbone.Router.extend({
   routes: {
@@ -17,14 +16,10 @@ const IndexRouter = Backbone.Router.extend({
 
     const titleLayout = new TitleLayout({
       title: config.meta.title,
-    });
-
-    const descriptionLayout = new DescriptionLayout({
       description: config.meta.description,
     });
 
     mainView.showChildView('title', titleLayout);
-    mainView.showChildView('description', descriptionLayout);
     mainView.showChildView('mainContainer', routesLayout);
   },
 });
