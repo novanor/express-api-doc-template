@@ -1,5 +1,5 @@
-import SendBoxRouter from '../routes/SendBox';
-import IndexRouter from '../routes/Index';
+import SendBoxRouter from '../routes/SendBoxRouter';
+import IndexRouter from '../routes/IndexRouter';
 
 export default function () {
   return {
