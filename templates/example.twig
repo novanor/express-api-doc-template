@@ -10,15 +10,27 @@
 <table class="table dt-example-content" style="display: none">
     <tbody>
     <tr>
-        <td>Request</td>
-        <td>Response</td>
+        <td style="border: none">Request Headers</td>
+        <td style="border: none">Response Headers</td>
     </tr>
-    <tr style="max-width: 50vh">
-        <td>
-            <pre style="width: auto">{{ request }}</pre>
+    <tr>
+        <td style="width: 50%; border: none">
+            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8" disabled>{{ requestHeaders }}</textarea>
         </td>
-        <td>
-            <pre style="width: auto">{{ response }}</pre>
+        <td style="width: 50%">
+            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8" disabled>{{ responseHeaders }}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>Request Body</td>
+        <td>Response Body</td>
+    </tr>
+    <tr style="max-width: 100%">
+        <td style="width: 50%">
+            <textarea style="resize: none; width: 100%; height: 500px; background-color: #FFF" disabled>{{ requestBody }}</textarea>
+        </td>
+        <td style="width: 50%">
+            <textarea style="resize: none; width: 100%; height: 500px; background-color: #FFF" disabled>{{ responseBody }}</textarea>
         </td>
     </tr>
     </tbody>
