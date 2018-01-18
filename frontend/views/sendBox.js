@@ -1,8 +1,6 @@
 import Marionette from 'backbone.marionette';
 import {render as template} from 'templates/sendBox.twig';
-import _ from 'lodash';
 import $ from 'jquery';
-import options from '../helpers/config';
 import Messenger from '../helpers/Messenger';
 
 const FAIL_STATUS_RANGE = 400;

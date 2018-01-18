@@ -10,27 +10,31 @@
 <table class="table dt-example-content" style="display: none">
     <tbody>
     <tr>
-        <td style="border: none">Request Headers</td>
-        <td style="border: none">Response Headers</td>
-    </tr>
-    <tr>
-        <td style="width: 50%; border: none">
-            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8" disabled>{{ requestHeaders }}</textarea>
+        <td style="border: none; border-right: 2px solid lightgray; background-color: #F8FFF8; padding-bottom: 0px">
+            <b style="padding: 10px">Request Headers</b>
         </td>
-        <td style="width: 50%">
-            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8" disabled>{{ responseHeaders }}</textarea>
+        <td style="border: none; background-color: #F8FFF8; padding-bottom: 0px">
+            <b style="padding: 10px">Response Headers</b>
         </td>
     </tr>
     <tr>
-        <td>Request Body</td>
-        <td>Response Body</td>
+        <td style="width: 50%; border: none; border-right: 2px solid lightgray; padding-top: 0px">
+            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8; border: none; padding: 10px" disabled>{{ requestHeaders }}</textarea>
+        </td>
+        <td style="width: 50%; border: none; padding-top: 0px">
+            <textarea style="resize: none; width: 100%; height: 300px; background-color: #F8FFF8; border: none; padding: 10px" disabled>{{ responseHeaders }}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td style="border: none; border-right: 2px solid lightgray; background-color: #F8F8FF; padding-bottom: 0px"><b style="padding: 10px">Request Body</b></td>
+        <td style="border: none; background-color: #F8F8FF; padding-bottom: 0px"><b style="padding: 10px">Response Body</b></td>
     </tr>
     <tr style="max-width: 100%">
-        <td style="width: 50%">
-            <textarea style="resize: none; width: 100%; height: 500px; background-color: #FFF" disabled>{{ requestBody }}</textarea>
+        <td style="width: 50%; border: none; border-right: 2px solid lightgray; padding-top: 0px">
+            <textarea style="resize: none; width: 100%; height: 500px; background-color: #F8F8FF; border: none; padding: 10px" disabled>{{ requestBody }}</textarea>
         </td>
-        <td style="width: 50%">
-            <textarea style="resize: none; width: 100%; height: 500px; background-color: #FFF" disabled>{{ responseBody }}</textarea>
+        <td style="width: 50%; border: none; padding-top: 0px">
+            <textarea style="resize: none; width: 100%; height: 500px; background-color: #F8F8FF; border: none; padding: 10px" disabled>{{ responseBody }}</textarea>
         </td>
     </tr>
     </tbody>
