@@ -74,24 +74,34 @@ const sendBoxLayout = Marionette.View.extend({
     this.showChildView('description', new RouteDescriptionView({
       model: description,
     }));
-    this.showChildView('requestParams', new KeyValueDescriptionView({
-      model: {
-        sectionTitle: 'Request Params',
-        data: reqParams,
-      },
-    }));
-    this.showChildView('responseParams', new KeyValueDescriptionView({
-      model: {
-        sectionTitle: 'Response Params',
-        data: resParams,
-      },
-    }));
-    this.showChildView('notes', new KeyValueDescriptionView({
-      model: {
-        sectionTitle: 'Notes',
-        data: notes,
-      },
-    }));
+
+    if (reqParams.length) {
+      this.showChildView('requestParams', new KeyValueDescriptionView({
+        model: {
+          sectionTitle: 'Request Params',
+          data: reqParams,
+        },
+      }));
+    }
+
+    if (resParams.length) {
+      this.showChildView('responseParams', new KeyValueDescriptionView({
+        model: {
+          sectionTitle: 'Response Params',
+          data: resParams,
+        },
+      }));
+    }
+
+    if (notes.length) {
+      this.showChildView('notes', new KeyValueDescriptionView({
+        model: {
+          sectionTitle: 'Notes',
+          data: notes,
+        },
+      }));
+    }
+
     this.showChildView('examples', new ExamplesView({
       collection: new Backbone.Collection(this.options.examples),
     }));
