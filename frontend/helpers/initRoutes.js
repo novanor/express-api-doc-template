@@ -4,6 +4,6 @@ import IndexRouter from '../routes/IndexRouter';
 export default function () {
   return {
     sendBox: new SendBoxRouter(),
-    index:   new IndexRouter(),
+    index: new IndexRouter(),
   };
 }

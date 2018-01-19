@@ -1,0 +1,13 @@
+<div style="margin-top: 50px">
+   <div class="lead"><b>{{sectionTitle}}</b></div>
+
+   <table style="width: 100%">
+      {% for pair in keyValuePairs %}
+         <tr style="margin-bottom: 10px">
+            <td style="width:15%; border: none; padding-bottom: 15px"><b>{{pair.name}}</b></td>
+            <td style="border: none; padding-bottom: 15px">{{pair.value}}</td>
+         </tr>
+         <tr class="spacer"></tr>
+      {% endfor %}
+   </table>
+</div>
