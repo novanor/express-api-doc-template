@@ -1,4 +1,4 @@
-# template generator for [express-api-doc](https://www.npmjs.com/package/express-api-doc)
+# template generator for [express-api-doc](https://github.com/novanor/express-api-doc)
 
 ## run:
 ```sh
