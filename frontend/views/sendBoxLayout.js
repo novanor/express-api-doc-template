@@ -1,17 +1,20 @@
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import showdown from 'showdown';
 import {render as template} from 'templates/sendBoxLayout.twig';
 // import SendBoxView from './sendBox';
 import RouteDescriptionView from './routeDescription';
 import ExamplesView from './examples';
 import KeyValueDescriptionView from './keyValueDescription';
 
+const markdownConverter = new showdown.Converter();
+
 function paramObjectToParamArray(obj) {
   const arr = [];
 
   Object.keys(obj).forEach((key) => arr.push({
     name: key,
-    value: obj[key],
+    value: markdownConverter.makeHtml(obj[key]),
   }));
 
   return arr;
@@ -19,20 +22,20 @@ function paramObjectToParamArray(obj) {
 
 function destructureMeta(meta) {
   let description = '';
-  let reqParams = [];
-  let resParams = [];
+  let headerParams = [];
+  let bodyParams = [];
   let notes = [];
 
   if (meta.description) {
-    description = meta.description;
+    description = markdownConverter.makeHtml(meta.description);
   }
 
-  if (meta.requestParams) {
-    reqParams = paramObjectToParamArray(meta.requestParams);
+  if (meta.headerParams) {
+    headerParams = paramObjectToParamArray(meta.headerParams);
   }
 
-  if (meta.responseParams) {
-    resParams = paramObjectToParamArray(meta.responseParams);
+  if (meta.bodyParams) {
+    bodyParams = paramObjectToParamArray(meta.bodyParams);
   }
 
   if (meta.notes) {
@@ -41,8 +44,8 @@ function destructureMeta(meta) {
 
   return {
     description,
-    reqParams,
-    resParams,
+    headerParams,
+    bodyParams,
     notes,
   };
 }
@@ -52,8 +55,8 @@ const sendBoxLayout = Marionette.View.extend({
 
   regions: {
     description: '#routeDescription',
-    requestParams: '#requestParams',
-    responseParams: '#responseParams',
+    headerParams: '#headerParams',
+    bodyParams: '#bodyParams',
     notes: '#notes',
     // sendBox: '#sendBox',
     examples: '#examples',
@@ -66,8 +69,8 @@ const sendBoxLayout = Marionette.View.extend({
 
     const {
       description,
-      reqParams,
-      resParams,
+      headerParams,
+      bodyParams,
       notes,
     } = destructureMeta(this.model.get('meta'));
 
@@ -75,20 +78,20 @@ const sendBoxLayout = Marionette.View.extend({
       model: description,
     }));
 
-    if (reqParams.length) {
-      this.showChildView('requestParams', new KeyValueDescriptionView({
+    if (headerParams.length) {
+      this.showChildView('headerParams', new KeyValueDescriptionView({
         model: {
-          sectionTitle: 'Request Params',
-          data: reqParams,
+          sectionTitle: 'Header Params',
+          data: headerParams,
         },
       }));
     }
 
-    if (resParams.length) {
-      this.showChildView('responseParams', new KeyValueDescriptionView({
+    if (bodyParams.length) {
+      this.showChildView('bodyParams', new KeyValueDescriptionView({
         model: {
-          sectionTitle: 'Response Params',
-          data: resParams,
+          sectionTitle: 'Body Params',
+          data: bodyParams,
         },
       }));
     }
